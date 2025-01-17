@@ -28,6 +28,9 @@ namespace udit {
 
         float angle; // Ángulo para las transformaciones animadas
 
+        glm::mat4 view_matrix; // Matriz de vista para la cámara
+        glm::vec3 camera_position; // Posición de la cámara
+
         GLuint compile_shaders(); // Método para compilar los shaders
         void show_compilation_error(GLuint shader_id); // Maneja errores de compilación de shaders
         void show_linkage_error(GLuint program_id); // Maneja errores de enlace de programas de shaders
@@ -38,6 +41,7 @@ namespace udit {
         void update(); // Actualiza las animaciones y estados
         void render(); // Renderiza la escena
         void resize(int width, int height); // Ajusta la proyección cuando se redimensiona la ventana
+        void move_camera(char direction); // Método para mover la cámara
     };
 
 }

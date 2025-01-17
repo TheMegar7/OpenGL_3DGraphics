@@ -37,7 +37,7 @@ namespace udit {
         "    fragment_color = vec4(front_color, 1.0);\n"
         "}";
 
-    Scene::Scene(int width, int height) : angle(0.0f), cylinder(0.5f, 1.0f, 36), cone(0.5f, 1.0f, 36) {
+    Scene::Scene(int width, int height) : angle(0.0f), cylinder(0.5f, 1.0f, 36), cone(0.5f, 1.0f, 36), camera_position(0.0f, 0.0f, 0.0f) {
         // Habilitar características de OpenGL para ocultar caras traseras y manejar profundidad
         glEnable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
@@ -58,26 +58,26 @@ namespace udit {
     }
 
     void Scene::render() {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Limpiar el búfer de color y profundidad
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glm::mat4 model_view_matrix(1.0f); // Matriz identidad
+        glm::mat4 model_view_matrix = view_matrix; // Aplicar la cámara a toda la escena
 
         // Transformar y renderizar el plano
-        model_view_matrix = glm::translate(model_view_matrix, glm::vec3(-1.0f, 0.0f, -6.0f));
-        model_view_matrix = glm::rotate(model_view_matrix, angle, glm::vec3(0.0f, 1.0f, 0.0f));
-        glUniformMatrix4fv(model_view_matrix_id, 1, GL_FALSE, glm::value_ptr(model_view_matrix));
+        glm::mat4 object_matrix = glm::translate(model_view_matrix, glm::vec3(-1.0f, 0.0f, -6.0f));
+        object_matrix = glm::rotate(object_matrix, angle, glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(model_view_matrix_id, 1, GL_FALSE, glm::value_ptr(object_matrix));
         plane.render();
 
         // Transformar y renderizar el cilindro
-        model_view_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(1.5f, 0.0f, -6.0f));
-        model_view_matrix = glm::rotate(model_view_matrix, angle, glm::vec3(1.0f, 0.0f, 0.0f));
-        glUniformMatrix4fv(model_view_matrix_id, 1, GL_FALSE, glm::value_ptr(model_view_matrix));
+        object_matrix = glm::translate(model_view_matrix, glm::vec3(1.5f, 0.0f, -6.0f));
+        object_matrix = glm::rotate(object_matrix, angle, glm::vec3(1.0f, 0.0f, 0.0f));
+        glUniformMatrix4fv(model_view_matrix_id, 1, GL_FALSE, glm::value_ptr(object_matrix));
         cylinder.render();
 
         // Transformar y renderizar el cono
-        model_view_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 2.0f, -6.0f));
-        model_view_matrix = glm::rotate(model_view_matrix, angle, glm::vec3(1.0f, 0.0f, 0.0f));
-        glUniformMatrix4fv(model_view_matrix_id, 1, GL_FALSE, glm::value_ptr(model_view_matrix));
+        object_matrix = glm::translate(model_view_matrix, glm::vec3(0.0f, 2.0f, -6.0f));
+        object_matrix = glm::rotate(object_matrix, angle, glm::vec3(1.0f, 0.0f, 0.0f));
+        glUniformMatrix4fv(model_view_matrix_id, 1, GL_FALSE, glm::value_ptr(object_matrix));
         cone.render();
     }
 
@@ -86,6 +86,35 @@ namespace udit {
         glm::mat4 projection_matrix = glm::perspective(45.0f, (float)width / height, 0.1f, 100.0f);
         glUniformMatrix4fv(projection_matrix_id, 1, GL_FALSE, glm::value_ptr(projection_matrix));
         glViewport(0, 0, width, height); // Ajustar la vista
+    }
+
+    void Scene::move_camera(char direction) {
+        float speed = 0.1f;
+        glm::vec3 forward(0.0f, 0.0f, -1.0f);
+        glm::vec3 right(1.0f, 0.0f, 0.0f);
+        glm::vec3 up(0.0f, 1.0f, 0.0f);
+
+        if (direction == 'w') {
+            camera_position += speed * forward;
+        }
+        else if (direction == 's') {
+            camera_position -= speed * forward;
+        }
+        else if (direction == 'a') {
+            camera_position -= speed * right;
+        }
+        else if (direction == 'd') {
+            camera_position += speed * right;
+        }
+        else if (direction == 'l') { // LShift (subir)
+            camera_position += speed * up;
+        }
+        else if (direction == 'c') { // LCtrl (bajar)
+            camera_position -= speed * up;
+        }
+
+
+        view_matrix = glm::translate(glm::mat4(1.0f), -camera_position);
     }
 
     GLuint Scene::compile_shaders() {
