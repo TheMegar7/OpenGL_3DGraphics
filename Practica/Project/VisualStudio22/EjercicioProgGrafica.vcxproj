@@ -140,16 +140,21 @@
     <ClCompile Include="..\..\Code\EjercicioProgGrafica.cpp" />
     <ClCompile Include="..\..\Code\Plane.cpp" />
     <ClCompile Include="..\..\Code\Scene.cpp" />
+    <ClCompile Include="..\..\Code\Skybox.cpp" />
+    <ClCompile Include="..\..\Code\Texture_Cube.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\shared\code\Color.hpp" />
     <ClInclude Include="..\..\..\shared\code\Color_Buffer.hpp" />
     <ClInclude Include="..\..\..\shared\code\opengl-recipes.hpp" />
     <ClInclude Include="..\..\..\shared\code\Window.hpp" />
+    <ClInclude Include="..\..\Code\Camera.hpp" />
     <ClInclude Include="..\..\Code\Cone.hpp" />
     <ClInclude Include="..\..\Code\Cylinder.hpp" />
     <ClInclude Include="..\..\Code\Plane.hpp" />
     <ClInclude Include="..\..\Code\Scene.hpp" />
+    <ClInclude Include="..\..\Code\Skybox.hpp" />
+    <ClInclude Include="..\..\Code\Texture_Cube.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

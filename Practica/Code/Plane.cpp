@@ -1,10 +1,10 @@
 #include "Plane.hpp"
 
 const GLfloat Plane::coordinates[] = {
-    -1.0f, 1.0f, 0.0f,
-     1.0f, 1.0f, 0.0f,
-     1.0f, -1.0f,  0.0f,
-    -1.0f, -1.0f,  0.0f
+    -1.0f, 0.0f, 1.0f,
+     1.0f, 0.0f, 1.0f,
+     1.0f, 0.0f,  -1.0f,
+    -1.0f, 0.0f,  -1.0f
 };
 
 const GLfloat Plane::colors[] = {
@@ -16,7 +16,9 @@ const GLfloat Plane::colors[] = {
 
 const GLuint Plane::indices[] = {
     0, 3, 1,
-    1, 3, 2
+    1, 3, 2,
+    0, 1, 3,
+    1, 2, 3
 };
 
 Plane::Plane() {
