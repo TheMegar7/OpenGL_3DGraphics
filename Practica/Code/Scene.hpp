@@ -8,44 +8,36 @@
 #include "Plane.hpp"
 #include "Cylinder.hpp"
 #include "Cone.hpp"
-#include "Cube.hpp"
+#include <string>
 #include <glad/glad.h>
 #include <glm.hpp>
-#include <string>
 
 namespace udit {
 
     class Scene {
     private:
-        static const std::string vertex_shader_flat;
-        static const std::string fragment_shader_flat;
-        static const std::string vertex_shader_gouraud;
-        static const std::string fragment_shader_gouraud;
+        static const std::string vertex_shader_code; // Código fuente del shader de vértices
+        static const std::string fragment_shader_code; // Código fuente del shader de fragmentos
 
-        GLuint shader_flat;
-        GLuint shader_gouraud;
+        GLint model_view_matrix_id; // Identificador de la matriz de modelo-vista en el shader
+        GLint projection_matrix_id; // Identificador de la matriz de proyección en el shader
 
-        GLint model_view_matrix_id_flat;
-        GLint projection_matrix_id_flat;
-        GLint model_view_matrix_id_gouraud;
-        GLint projection_matrix_id_gouraud;
+        Plane plane; // Instancia del plano
+        Cylinder cylinder; // Instancia del cilindro
+        Cone cone; // Instancia del cono
 
-        Plane plane;
-        Cylinder cylinder;
-        Cone cone;
-        Cube cube;
+        float angle; // Ángulo para las transformaciones animadas
 
-        float angle;
-
-        GLuint compile_shaders(const std::string& vertex_shader, const std::string& fragment_shader);
-        void show_compilation_error(GLuint shader_id);
-        void show_linkage_error(GLuint program_id);
+        GLuint compile_shaders(); // Método para compilar los shaders
+        void show_compilation_error(GLuint shader_id); // Maneja errores de compilación de shaders
+        void show_linkage_error(GLuint program_id); // Maneja errores de enlace de programas de shaders
 
     public:
-        Scene(int width, int height);
-        void update();
-        void render();
-        void resize(int width, int height);
+        Scene(int width, int height); // Constructor
+
+        void update(); // Actualiza las animaciones y estados
+        void render(); // Renderiza la escena
+        void resize(int width, int height); // Ajusta la proyección cuando se redimensiona la ventana
     };
 
 }

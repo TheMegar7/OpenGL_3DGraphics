@@ -136,7 +136,6 @@
     <ClCompile Include="..\..\..\shared\code\opengl-recipes.cpp" />
     <ClCompile Include="..\..\..\shared\code\Window.cpp" />
     <ClCompile Include="..\..\Code\Cone.cpp" />
-    <ClCompile Include="..\..\Code\Cube.cpp" />
     <ClCompile Include="..\..\Code\Cylinder.cpp" />
     <ClCompile Include="..\..\Code\EjercicioProgGrafica.cpp" />
     <ClCompile Include="..\..\Code\Plane.cpp" />
@@ -148,7 +147,6 @@
     <ClInclude Include="..\..\..\shared\code\opengl-recipes.hpp" />
     <ClInclude Include="..\..\..\shared\code\Window.hpp" />
     <ClInclude Include="..\..\Code\Cone.hpp" />
-    <ClInclude Include="..\..\Code\Cube.hpp" />
     <ClInclude Include="..\..\Code\Cylinder.hpp" />
     <ClInclude Include="..\..\Code\Plane.hpp" />
     <ClInclude Include="..\..\Code\Scene.hpp" />

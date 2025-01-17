@@ -19,15 +19,15 @@
             enum
             {
                 COORDINATES_VBO,
-                NORMALS_VBO,
-                INDICES_IBO,
+                COLORS_VBO,
+                INDICES_EBO,
                 VBO_COUNT
             };
 
             // Arrays de datos del cubo base:
 
             static const GLfloat coordinates[];
-            static const GLfloat normals    [];
+            static const GLfloat colors     [];
             static const GLubyte indices    [];
 
         private:

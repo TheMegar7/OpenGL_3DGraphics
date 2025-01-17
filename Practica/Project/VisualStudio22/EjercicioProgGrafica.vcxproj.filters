@@ -36,9 +36,6 @@
     <ClCompile Include="..\..\..\shared\code\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Code\Cube.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Code\Plane.hpp">
@@ -63,9 +60,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\shared\code\Color_Buffer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\Cube.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
